@@ -4,7 +4,7 @@
 # Antonio Favarin Freire
 
 clear
-echo "Bem vindo $USER"
+echo "Iniciando rotina de backup"
 month=$(date "+%B")
 name_zip=$(date +"%Y-%m-%d")
 
