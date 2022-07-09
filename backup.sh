@@ -71,4 +71,5 @@ then
 
 else 
     echo "Esta pasta não existe, por favor crie a pasta."
+    exit 0
 fi
