@@ -56,8 +56,8 @@ then
     fi
     # criar rotina para criar arquivo zip e mover para dentro da pasta backup
     zip "/home/backups/$month/"$name_zip "/home/$USER/projetos/"
-    
-    if [ -d "/home/backups/"$month/$name_zip.zip ]
+    DIR=/home/backups/$month/
+    if [ -e $DIR$name_zip.zip ]
     then 
         echo
         echo "Tudo certo backup feito !" 
