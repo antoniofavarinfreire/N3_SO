@@ -7,7 +7,7 @@ clear
 echo "Bem vindo $USER"
 month=$(date "+%B")
 name_zip=$(date +"%Y-%m-%d")
-echo "$name_zip"
+
 if [ -d "/home/$USER/projetos" ] 
 then
 # echo "home/$USER/projetos"
@@ -27,16 +27,28 @@ then
         echo "Pasta já existente."
         echo "Deseja sobrepor o backup [y,N]?"
         read choice
+        if [ $choice != "y" ]
+        then 
+            if [ $choice != "N" ]
+            then 
+                echo "Comando não encontrado"
+                exit 0
+            fi
+            
+        fi
         case $choice in
             "y")
                 echo "Substituindo pasta do mes de $month"
                 echo
+                rm -rf "/home/backups/$month" 
                 mkdir "/home/backups/$month"
                     ;;
             "N")
-                    echo "That's right!"
+                    echo "Encerrando o processo"
+                    exit 0 
                     ;;
         esac
+        
         else 
             echo "Criando pasta do mês de $month"
             echo
@@ -45,6 +57,18 @@ then
     # criar rotina para criar arquivo zip e mover para dentro da pasta backup
     zip "/home/backups/$month/"$name_zip "/home/$USER/projetos/"
     
+    if [ -d "/home/backups/"$month/$name_zip.zip ]
+    then 
+        echo
+        echo "Tudo certo backup feito !" 
+        exit 0
+    else 
+        echo
+        echo "Algo deu errado."
+        echo "Por favor tente executar o script novamente."
+        exit 0
+    fi
+
 else 
     echo "Esta pasta não existe, por favor crie a pasta."
 fi
